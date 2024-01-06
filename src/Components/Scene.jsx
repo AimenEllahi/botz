@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   PerspectiveCamera,
   Environment,
@@ -15,18 +15,22 @@ import { lerp } from "three/src/math/MathUtils";
 const Models = () => {
   const [mouseRotation, setMouseRotation] = useState({ x: 0, y: 0 });
   const platformRef = useRef();
+  const { camera } = useThree();
+
+  useEffect(() => {
+    console.log(camera.position);
+    camera.position.set(16, 30, 30);
+  }, []);
 
   // Function to handle mousemove event and update mouseRotation state
   const handleMouseMove = (event) => {
     const { clientX, clientY } = event;
     const { offsetWidth, offsetHeight } = event.target;
-
-    const x = (clientX / offsetWidth) * 2 - 1;
-    const y = -(clientY / offsetHeight) * 2 + 1;
-
+    const x = ((clientX / offsetWidth) * 2 - 1) * 0.2;
+    const y = (-(clientY / offsetHeight) * 2 + 1) * 0.5;
     setMouseRotation({
       x: Math.min(Math.max(x, -1), 1),
-      y: Math.min(Math.max(y, -1), 1),
+      y: 0,
     });
   };
 
@@ -59,22 +63,31 @@ const Models = () => {
 
 export default function Scene() {
   return (
-    <div className="h-screen w-screen">
+    <div className='h-screen w-screen'>
       <Canvas>
-        <color attach="background" args={["#000"]} />
-        <ambientLight intensity={0.5} />
-        <spotLight position={[0, 0, 0]} angle={0.15} penumbra={1} castShadow />
+        <color attach='background' args={["#000"]} />
+        <ambientLight intensity={1} />
+
         <pointLight position={[-10, -10, -10]} />
         <directionalLight
-          color={0xffffff}
+          color={"#ffffff"}
           position={[5, 5, 5]}
-          intensity={1}
+          intensity={0.3}
+          castShadow
+          shadow-mapSize={{ width: 1024, height: 1024 }}
+          shadow-bias={-0.001}
+        />
+        <directionalLight
+          color={"#ff0000"}
+          position={[5, 5, 5]}
+          intensity={0.3}
           castShadow
           shadow-mapSize={{ width: 1024, height: 1024 }}
           shadow-bias={-0.001}
         />
         {/* <Environment preset="dawn" /> */}
         <Suspense fallback={<Loader />}>
+          {/* <Environment preset='night' /> */}
           <Models />
         </Suspense>
       </Canvas>

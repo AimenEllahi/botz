@@ -5,13 +5,19 @@ import { useControls } from "leva";
 export function Model(props) {
   const { nodes, materials } = useGLTF("/signup.glb");
 
+  // const { position } = useControls({
+  //   position: {
+  //     value: [15, 28, 24],
+  //     step: 0.1,
+  //   },
+  // });
   return (
     <group
       {...props}
       dispose={null}
-      position={[0, -1.9, 0]}
+      position={[15.5, 28, 24]}
       rotation={[0, 5.5, 0]}
-      scale={0.8}
+      scale={1}
     >
       <group
         rotation={[0, Math.PI / 4, -Math.PI / 2]}

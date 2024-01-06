@@ -44,23 +44,8 @@ const Platform = () => {
     );
   };
 
-  // Use the useFrame hook to update the animation on each frame
-  useFrame(() => {
-    updateSelectedBoxes();
-  });
-
-  // Use the useEffect hook to select random boxes on mount
-  useEffect(() => {
-    selectRandomBoxes();
-    const interval = setInterval(() => {
-      selectRandomBoxes();
-    }, 3000);
-  }, []);
-
   return (
-    <group
-      position={[-17.199999999999967, -29.39999999999991, -24.899999999999867]}
-    >
+    <group position={[0, 0, 0]}>
       {Array(boxRows)
         .fill()
         .map((_, i) => {
@@ -69,18 +54,10 @@ const Platform = () => {
               {Array(boxesPerRow)
                 .fill()
                 .map((_, j) => {
-                  const isSelected = selectedBoxes.some(
-                    (box) => box.row === i && box.column === j
-                  );
-
                   return (
                     <BoxInstance
                       key={j}
-                      position={[
-                        j * spacing,
-                        isSelected ? selectedBoxes[0].position : 0,
-                        i * spacing,
-                      ]}
+                      position={[j * spacing, 0, i * spacing]}
                     />
                   );
                 })}
