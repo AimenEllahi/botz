@@ -29,27 +29,30 @@ export function Model(props) {
   };
 
   const animateCamera = () => {
-    gsap.to(camera.position, {
+    const tl = gsap.timeline({});
+    tl.to(camera.position, {
       duration: 2,
       delay: 0.5,
       z: -16,
       ease: "power2.inOut",
-      onComplete: () => {
-        gsap.to(camera.rotation, {
-          duration: 1,
-          ease: "power2.inOut",
-
-          y: Math.PI / 2,
-          onComplete: () => {
-            gsap.to("#signup-form", {
-              duration: 2,
-              autoAlpha: 1,
-              display: "block",
-            });
-          },
-        });
-      },
-    });
+    })
+      .to(camera.rotation, {
+        duration: 1,
+        ease: "power2.inOut",
+        y: Math.PI / 2,
+      })
+      .to(camera.position, {
+        x: -2.5,
+        duration: 1.5,
+        delay: 0.5,
+        onComplete: () => {
+          gsap.to("#signup-form", {
+            duration: 2,
+            autoAlpha: 1,
+            display: "block",
+          });
+        },
+      });
   };
 
   return (
@@ -59,7 +62,7 @@ export function Model(props) {
       receiveShadow
       ref={groupRef}
       dispose={null}
-      position={[16, 27, 24]}
+      position={[15.5, 27, 24]}
       rotation={[-0.25, 5.5, 0]}
       scale={1}
       onClick={handleModelClick}

@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Float } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
+import { useControls } from "leva";
 
 export function Model(props) {
   const { nodes, materials } = useGLTF("/logos.glb");
@@ -12,30 +13,30 @@ export function Model(props) {
   const logoBlueprismRef = useRef();
 
   const handleHover = (ref, hoverY, returnY) => {
-    gsap.to(ref.current.rotation, {
-      y: Math.PI * 2,
-      duration: 0.7,
+    gsap.to(ref.current.position, {
+      y: "+=3.5",
+      duration: 1,
       ease: "power2.inOut",
+
+      onStart: () => {
+        gsap.to(ref.current.rotation, {
+          y: Math.PI * 2,
+          duration: 1,
+          ease: "power2.inOut",
+        });
+      },
 
       onComplete: () => {
         gsap.to(ref.current.position, {
-          y: hoverY,
-          duration: 0.5,
+          y: returnY,
+          duration: 1,
           ease: "power2.inOut",
 
-          onComplete: () => {
+          onStart: () => {
             gsap.to(ref.current.rotation, {
               y: 0,
-              duration: 0.5,
-
+              duration: 1,
               ease: "power2.inOut",
-            });
-
-            gsap.to(ref.current.position, {
-              y: returnY,
-              duration: 0.5,
-              ease: "power2.inOut",
-              delay: 1,
             });
           },
         });
@@ -43,59 +44,62 @@ export function Model(props) {
     });
   };
 
-  useFrame((state, delta) => {
-    const time = state.clock.getElapsedTime();
-    const floatHeight = Math.sin(time) * 0.2;
-    groupRef.current.position.y = 28.5 + floatHeight;
-  });
+  // const { position } = useControls("logos", {
+  //   position: {
+  //     value: [-12.1, -1.3, 1],
+  //     step: 0.1,
+  //   },
+  // });
 
   return (
     <group
       ref={groupRef}
       {...props}
       dispose={null}
+      castShadow
       position={[16, 28.5, 21]}
       scale={0.7}
       rotation={[0, -0.5, 0]}
     >
-      <mesh
-        ref={uiRef}
-        onPointerOver={() => handleHover(uiRef, 3.5, 1.8)}
-        castShadow
-        receiveShadow
-        geometry={nodes.logo_ui.geometry}
-        material={materials.initialShadingGroup}
-        position={[-6.5, 1.8, 8]}
-      />
-      <mesh
-        ref={logoARef}
-        onPointerOver={() => handleHover(logoARef, 3.5, 1)}
-        castShadow
-        receiveShadow
-        geometry={nodes.logo_A.geometry}
-        material={materials.initialShadingGroup}
-        position={[7, 1, 2]}
-      />
-      <mesh
-        ref={logoArrowRef}
-        onPointerOver={() => handleHover(logoArrowRef, 3.5, 1.801)}
-        castShadow
-        receiveShadow
-        geometry={nodes.logo_arrow.geometry}
-        material={materials.initialShadingGroup}
-        position={[6, 1.801, -7]}
-        scale={2}
-      />
-      <mesh
-        ref={logoBlueprismRef}
-        onPointerOver={() => handleHover(logoBlueprismRef, 3.5, 0.288)}
-        castShadow
-        receiveShadow
-        geometry={nodes.logo_blueprism.geometry}
-        material={materials.initialShadingGroup}
-        position={[-6, 0.288, 0]}
-        scale={1.7}
-      />
+      <Float speed={2} rotationIntensity={0} floatingRange={[0.4, 1.5]}>
+        <mesh
+          ref={uiRef}
+          onPointerOver={() => handleHover(uiRef, 3.5, -0.1)}
+          castShadow
+          receiveShadow
+          geometry={nodes.logo_ui.geometry}
+          material={materials.initialShadingGroup}
+          position={[-7.8, -0.1, 1.8]}
+        />
+        <mesh
+          ref={logoARef}
+          onPointerOver={() => handleHover(logoARef, 3.5, -0.7)}
+          castShadow
+          receiveShadow
+          geometry={nodes.logo_A.geometry}
+          material={materials.initialShadingGroup}
+          position={[8.8, -0.7, -3.8]}
+        />
+        <mesh
+          ref={logoArrowRef}
+          onPointerOver={() => handleHover(logoArrowRef, 3.5, -0.2)}
+          castShadow
+          receiveShadow
+          geometry={nodes.logo_arrow.geometry}
+          material={materials.initialShadingGroup}
+          position={[8.6, -0.2, -10]}
+        />
+        <mesh
+          ref={logoBlueprismRef}
+          onPointerOver={() => handleHover(logoBlueprismRef, 3.5, -1.5)}
+          castShadow
+          receiveShadow
+          geometry={nodes.logo_blueprism.geometry}
+          material={materials.initialShadingGroup}
+          position={[-16.5, -1.5, -6.7]}
+          scale={1.7}
+        />
+      </Float>
     </group>
   );
 }

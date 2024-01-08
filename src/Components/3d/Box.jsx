@@ -1,9 +1,15 @@
 import React, { useRef, useMemo, useEffect } from "react";
 import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader";
-import { gsap } from "gsap";
-export default function BoxInstance({ position }) {
-  const gltf = useLoader(GLTFLoader, "/box.glb");
+import { useGLTF } from "@react-three/drei";
+import gsap from "gsap";
+export default function BoxInstance({ position, index }) {
+  if (
+    ((index.i === 8 || index.i === 7 || index.i === 9) && index.j === 0) ||
+    ((index.i === 8 || index.i === 7) && index.j === 1)
+  ) {
+    return <></>;
+  }
+  const gltf = useGLTF("/box.glb");
   const boxRef = useRef();
 
   const clonedGltf = useMemo(() => {
@@ -19,6 +25,15 @@ export default function BoxInstance({ position }) {
   }, [gltf.scene]);
 
   useEffect(() => {
+    if (
+      (index.i === 7 && index.j === 2) ||
+      (index.i === 6 && index.j === 1) ||
+      (index.i === 9 && index.j === 1) ||
+      (index.i === 9 && index.j === 2) ||
+      (index.i === 5 && index.j === 2)
+    ) {
+      return;
+    }
     if (!boxRef.current) return;
     const animateBox = () => {
       gsap.to(boxRef.current.position, {
@@ -45,8 +60,14 @@ export default function BoxInstance({ position }) {
   }, []);
 
   return (
-    <group scale={1.155} position={position} rotation={[0, 0, 0]}>
-      <primitive object={clonedGltf} ref={boxRef} />
+    <group
+      castShadow
+      receiveShadow
+      scale={1.3}
+      position={position}
+      rotation={[0, 0, 0]}
+    >
+      <primitive receiveShadow object={clonedGltf} ref={boxRef} />
     </group>
   );
 }
