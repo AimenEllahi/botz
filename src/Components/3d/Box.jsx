@@ -9,6 +9,11 @@ export default function BoxInstance({ position }) {
   const clonedGltf = useMemo(() => {
     if (gltf.scene) {
       const cloned = gltf.scene.clone(true);
+      //to cast shadow
+      cloned.traverse((obj) => {
+        obj.castShadow = true;
+        obj.receiveShadow = true;
+      });
       return cloned;
     }
   }, [gltf.scene]);
