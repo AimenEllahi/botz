@@ -2,9 +2,9 @@ import React from "react";
 
 const SignupForm = () => {
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-      <div className="max-w-md w-1/2 p-6 bg-transparent rounded-md shadow-md">
-        <h2 className="text-4xl py-2 font-bold mb-4 bg-gradient-to-r text-transparent bg-clip-text from-pink-500 to-orange-500 text-white">
+    <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center font-poppins">
+      <div className="max-w-md w-1/2 p-6 bg-transparent rounded-md">
+        <h2 className="text-4xl py-2 font-bold mb-4 bg-gradient-to-r !text-transparent bg-clip-text from-pink-500 to-orange-500 text-white">
           SignUp
         </h2>
         <form>
@@ -19,8 +19,8 @@ const SignupForm = () => {
               type="text"
               id="name"
               name="name"
-              className="w-full py-2 border-b-2 border-white bg-transparent focus:outline-none focus:border-orange-300 placeholder-white text-white"
-              placeholder="e.g. Bot123"
+              className="w-full rounded-md p-2 border-white bg-transparent border focus:border-orange-300 placeholder-white text-white placeholder-opacity-60 transition-all duration-300"
+              placeholder="Bot123"
             />
           </div>
 
@@ -35,8 +35,8 @@ const SignupForm = () => {
               type="email"
               id="email"
               name="email"
-              className="w-full py-2 border-b-2 border-white bg-transparent focus:outline-none focus:border-orange-300 placeholder-white text-white"
-              placeholder="e.g. bot@example.com"
+              className="w-full rounded-md p-2 border-white bg-transparent border focus:border-orange-300 placeholder-white text-white placeholder-opacity-60 transition-all duration-300"
+              placeholder="bot@example.com"
             />
           </div>
 
@@ -50,7 +50,7 @@ const SignupForm = () => {
             <select
               id="tool"
               name="tool"
-              className="w-full py-2 border-b-2 border-white bg-transparent focus:outline-none focus:border-orange-300 text-white dropdown-custom"
+              className="w-full rounded-md p-2 border-white bg-transparent border focus:border-orange-300 placeholder-white text-white"
             >
               <option
                 value="ui_path"
@@ -58,9 +58,24 @@ const SignupForm = () => {
               >
                 UI Path
               </option>
-              <option value="blue_prism">Blue Prism</option>
-              <option value="automation_anywhere">Automation Anywhere</option>
-              <option value="power_automate">Power Automate</option>
+              <option
+                value="automation_anywhere"
+                className="disabled:bg-black disabled:text-white"
+              >
+                Automation Anywhere
+              </option>
+              <option
+                value="blue_prism"
+                className="disabled:bg-black disabled:text-white"
+              >
+                Blue Prism
+              </option>
+              <option
+                value="workfusion"
+                className="disabled:bg-black disabled:text-white"
+              >
+                Workfusion
+              </option>
             </select>
           </div>
 
@@ -75,14 +90,14 @@ const SignupForm = () => {
               type="text"
               id="pin"
               name="pin"
-              className="w-full py-2 border-b-2 border-white bg-transparent focus:outline-none focus:border-orange-300 placeholder-white text-white"
-              placeholder="e.g. 1234"
+              className="w-full rounded-md p-2 border-white bg-transparent border focus:border-orange-300 placeholder-white text-white placeholder-opacity-60 transition-all duration-300"
+              placeholder="1234"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-pink-600 to-orange-500 text-white py-2 rounded-md hover:from-pink-700 hover:to-orange-600 focus:outline-none border-none"
+            className="w-1/3 bg-gradient-to-r from-pink-600 to-orange-500 text-white py-2 rounded-md hover:from-pink-700 hover:to-orange-600 focus:outline-none border-none"
           >
             Send
           </button>

@@ -45,7 +45,7 @@ export default function BoxInstance({ position }) {
   }, []);
 
   return (
-    <group scale={1.1} position={position} rotation={[0, 1, 0]}>
+    <group scale={1.155} position={position} rotation={[0, 0, 0]}>
       <primitive object={clonedGltf} ref={boxRef} />
     </group>
   );

@@ -32,11 +32,11 @@ export function Model(props) {
     gsap.to(camera.position, {
       duration: 2,
       delay: 0.5,
-      z: 2,
+      z: -16,
       ease: "power2.inOut",
       onComplete: () => {
         gsap.to(camera.rotation, {
-          duration: 2,
+          duration: 1,
           ease: "power2.inOut",
 
           y: Math.PI / 2,

@@ -1,5 +1,4 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./src/**/*.html",
     "./src/**/*.vue",
@@ -7,7 +6,11 @@ export default {
     "./src/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

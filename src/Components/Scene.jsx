@@ -11,6 +11,7 @@ import {
   EffectComposer,
   HueSaturation,
 } from "@react-three/postprocessing";
+import { useControls } from "leva";
 
 export default function Scene() {
   const formRef = useRef();
@@ -19,16 +20,18 @@ export default function Scene() {
     <div className="relative h-screen w-screen">
       <Canvas>
         <color attach="background" args={["#000"]} />
-        <fog attach="fog" args={["#000", 0, 30]} />
+        {/* <fog attach="fog" args={["#000", 0, 30]} /> */}
         <ambientLight intensity={3} color={"#3F2305"} />
+
         <directionalLight
           color={"#fff"}
-          position={[2, 2, 2]}
+          position={[1.000000000000001, 1.8000000000000003, 1.2]}
           intensity={4}
           castShadow
           shadow-mapSize={{ width: 1024, height: 1024 }}
           shadow-bias={-0.001}
         />
+
         <directionalLight
           color={"#3F2305"}
           position={[1, 2, 2]}

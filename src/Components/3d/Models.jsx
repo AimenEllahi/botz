@@ -28,36 +28,36 @@ const Models = () => {
   }, []);
 
   // Function to handle mousemove event and update mouseRotation state
-  const handleMouseMove = (event) => {
-    const { clientX, clientY } = event;
-    const { offsetWidth, offsetHeight } = event.target;
-    const x = ((clientX / offsetWidth) * 2 - 1) * 0.2;
-    const y = (-(clientY / offsetHeight) * 2 + 1) * 0.5;
-    setMouseRotation({
-      x: Math.min(Math.max(x, -1), 1),
-      y: 0,
-    });
-  };
+  // const handleMouseMove = (event) => {
+  //   const { clientX, clientY } = event;
+  //   const { offsetWidth, offsetHeight } = event.target;
+  //   const x = ((clientX / offsetWidth) * 2 - 1) * 0.2;
+  //   const y = (-(clientY / offsetHeight) * 2 + 1) * 0.5;
+  //   setMouseRotation({
+  //     x: Math.min(Math.max(x, -1), 1),
+  //     y: 0,
+  //   });
+  // };
 
-  useFrame(() => {
-    platformRef.current.rotation.x = lerp(
-      platformRef.current.rotation.x,
-      -mouseRotation.y * 0.05,
-      0.1
-    );
-    platformRef.current.rotation.y = lerp(
-      platformRef.current.rotation.y,
-      mouseRotation.x * 0.05,
-      0.1
-    );
-  });
+  // useFrame(() => {
+  //   platformRef.current.rotation.x = lerp(
+  //     platformRef.current.rotation.x,
+  //     -mouseRotation.y * 0.05,
+  //     0.1
+  //   );
+  //   platformRef.current.rotation.y = lerp(
+  //     platformRef.current.rotation.y,
+  //     mouseRotation.x * 0.05,
+  //     0.1
+  //   );
+  // });
 
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("mousemove", handleMouseMove);
+  //   return () => {
+  //     window.removeEventListener("mousemove", handleMouseMove);
+  //   };
+  // }, []);
   return (
     <group ref={platformRef}>
       <Platform />

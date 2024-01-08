@@ -1,10 +1,47 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import gsap from "gsap";
 
 export function Model(props) {
   const { nodes, materials } = useGLTF("/logos.glb");
   const groupRef = useRef();
+  const uiRef = useRef();
+  const logoARef = useRef();
+  const logoArrowRef = useRef();
+  const logoBlueprismRef = useRef();
+
+  const handleHover = (ref, hoverY, returnY) => {
+    gsap.to(ref.current.rotation, {
+      y: Math.PI * 2,
+      duration: 0.7,
+      ease: "power2.inOut",
+
+      onComplete: () => {
+        gsap.to(ref.current.position, {
+          y: hoverY,
+          duration: 0.5,
+          ease: "power2.inOut",
+
+          onComplete: () => {
+            gsap.to(ref.current.rotation, {
+              y: 0,
+              duration: 0.5,
+
+              ease: "power2.inOut",
+            });
+
+            gsap.to(ref.current.position, {
+              y: returnY,
+              duration: 0.5,
+              ease: "power2.inOut",
+              delay: 1,
+            });
+          },
+        });
+      },
+    });
+  };
 
   useFrame((state, delta) => {
     const time = state.clock.getElapsedTime();
@@ -22,13 +59,17 @@ export function Model(props) {
       rotation={[0, -0.5, 0]}
     >
       <mesh
+        ref={uiRef}
+        onPointerOver={() => handleHover(uiRef, 3.5, 1.8)}
         castShadow
         receiveShadow
         geometry={nodes.logo_ui.geometry}
         material={materials.initialShadingGroup}
-        position={[-2, 1.8, 8]}
+        position={[-6.5, 1.8, 8]}
       />
       <mesh
+        ref={logoARef}
+        onPointerOver={() => handleHover(logoARef, 3.5, 1)}
         castShadow
         receiveShadow
         geometry={nodes.logo_A.geometry}
@@ -36,6 +77,8 @@ export function Model(props) {
         position={[7, 1, 2]}
       />
       <mesh
+        ref={logoArrowRef}
+        onPointerOver={() => handleHover(logoArrowRef, 3.5, 1.801)}
         castShadow
         receiveShadow
         geometry={nodes.logo_arrow.geometry}
@@ -44,6 +87,8 @@ export function Model(props) {
         scale={2}
       />
       <mesh
+        ref={logoBlueprismRef}
+        onPointerOver={() => handleHover(logoBlueprismRef, 3.5, 0.288)}
         castShadow
         receiveShadow
         geometry={nodes.logo_blueprism.geometry}
