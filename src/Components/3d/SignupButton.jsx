@@ -33,7 +33,10 @@ export function Model(props) {
     tl.to(camera.position, {
       duration: 2,
       delay: 0.5,
+      x: 13,
+      y: 34,
       z: -16,
+
       ease: "power2.inOut",
     })
       .to(camera.rotation, {
@@ -43,6 +46,7 @@ export function Model(props) {
       })
       .to(camera.position, {
         x: -2.5,
+        y: 30,
         duration: 1.5,
         delay: 0.5,
         onComplete: () => {
@@ -62,7 +66,7 @@ export function Model(props) {
       receiveShadow
       ref={groupRef}
       dispose={null}
-      position={[16, 28, 24]}
+      position={[15.5, 29, 24]}
       rotation={[-0.25, 5.6, 0]}
       scale={1}
       onClick={handleModelClick}

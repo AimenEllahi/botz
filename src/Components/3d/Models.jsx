@@ -28,7 +28,7 @@ const Models = () => {
       {
         x: 16,
         y: 32,
-        z: window.innerWidth < 756 ? 45 : 30,
+        z: window.innerWidth < 756 ? 45 : 29.5,
         duration: 3,
         ease: "power2.out",
         onComplete: () => {
