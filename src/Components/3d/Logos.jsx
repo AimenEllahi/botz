@@ -58,7 +58,7 @@ export function Model(props) {
       dispose={null}
       castShadow
       position={[16, 28.5, 21]}
-      scale={0.7}
+      scale={1.4}
       rotation={[0, -0.5, 0]}
     >
       <Float speed={2} rotationIntensity={0} floatingRange={[0.4, 1.5]}>
@@ -69,34 +69,35 @@ export function Model(props) {
           receiveShadow
           geometry={nodes.logo_ui.geometry}
           material={materials.initialShadingGroup}
-          position={[-7.8, -0.1, 1.8]}
+          position={[-7.8, -0.1, 2.2]}
         />
         <mesh
           ref={logoARef}
-          onPointerOver={() => handleHover(logoARef, 3.5, -0.7)}
+          onPointerOver={() => handleHover(logoARef, 3.5, -0.4)}
           castShadow
           receiveShadow
           geometry={nodes.logo_A.geometry}
           material={materials.initialShadingGroup}
-          position={[8.8, -0.7, -3.8]}
+          position={[4.8, -0.4, -3.8]}
         />
         <mesh
           ref={logoArrowRef}
-          onPointerOver={() => handleHover(logoArrowRef, 3.5, -0.2)}
+          onPointerOver={() => handleHover(logoArrowRef, 3.5, 0.4)}
           castShadow
           receiveShadow
           geometry={nodes.logo_arrow.geometry}
           material={materials.initialShadingGroup}
-          position={[8.6, -0.2, -10]}
+          position={[3.6, 0.4, -10]}
+          scale={1.2}
         />
         <mesh
           ref={logoBlueprismRef}
-          onPointerOver={() => handleHover(logoBlueprismRef, 3.5, -1.5)}
+          onPointerOver={() => handleHover(logoBlueprismRef, 3.5, -0.7)}
           castShadow
           receiveShadow
           geometry={nodes.logo_blueprism.geometry}
           material={materials.initialShadingGroup}
-          position={[-16.5, -1.5, -6.7]}
+          position={[-16.5, -0.7, -6.7]}
           scale={1.7}
         />
       </Float>

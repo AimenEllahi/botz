@@ -62,8 +62,8 @@ export function Model(props) {
       receiveShadow
       ref={groupRef}
       dispose={null}
-      position={[15.5, 27, 24]}
-      rotation={[-0.25, 5.5, 0]}
+      position={[16, 28, 24]}
+      rotation={[-0.25, 5.6, 0]}
       scale={1}
       onClick={handleModelClick}
       onPointerEnter={() => (document.body.style.cursor = "pointer")}

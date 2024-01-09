@@ -27,10 +27,18 @@ const Models = () => {
       { x: 16, y: 0, z: window.innerWidth < 756 ? 45 : 30 },
       {
         x: 16,
-        y: 30,
+        y: 32,
         z: window.innerWidth < 756 ? 45 : 30,
         duration: 3,
         ease: "power2.out",
+        onComplete: () => {
+          gsap.to(camera.rotation, {
+            duration: 3,
+            ease: "power2.out",
+            x: -0.1,
+            y: 0.1,
+          });
+        },
       }
     );
   }, []);
