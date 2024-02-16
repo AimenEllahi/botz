@@ -16,9 +16,9 @@ import {
 } from "@react-three/postprocessing";
 import { useControls } from "leva";
 
-export default function Scene() {
+const CloudsGroup = () => {
   const cloudRef = useRef();
-  const [wind, setWind] = useState(false);
+
   const t1 = gsap.timeline();
   useEffect(() => {
     console.log(cloudRef.current);
@@ -31,10 +31,84 @@ export default function Scene() {
         ease: "power3.inOut",
       });
     }
-  }, [cloudRef.current]); // This will run the effect when cloudRef.current changes
+  }, [cloudRef]);
+  return (
+    <group ref={cloudRef} position={[0, 0, 10]}>
+      <Cloud
+        position={[-6, -2, 0]}
+        rotation={[0, 1, 0]}
+        args={[10, 10, 10]}
+        castShadow
+        receiveShadow
+        opacity={0.5}
+        blendFunction={THREE.AdditiveBlending}
+        size={0.5}
+        particles={30000}
+        rotationSpeed={0.2}
+        color={0x8d00ff}
+      />
+      <Cloud
+        position={[-6, -2, 0]}
+        rotation={[0, 1, 0]}
+        args={[10, 10, 10]}
+        castShadow
+        receiveShadow
+        opacity={0.2}
+        blendFunction={THREE.AdditiveBlending}
+        size={0.5}
+        particles={30000}
+        rotationSpeed={0.2}
+        color={0xffffff}
+      />
+      <Cloud
+        position={[6, 2, 0]}
+        rotation={[0, 1, 0]}
+        args={[10, 10, 10]}
+        castShadow
+        receiveShadow
+        opacity={0.5}
+        blendFunction={THREE.AdditiveBlending}
+        size={0.5}
+        particles={30000}
+        rotationSpeed={2}
+        color={0x8d00ff}
+      />
+      <Cloud
+        position={[4, -2, 0]}
+        rotation={[0, 1, 0]}
+        args={[10, 10, 10]}
+        castShadow
+        receiveShadow
+        opacity={0.5}
+        blendFunction={THREE.AdditiveBlending}
+        size={0.5}
+        particles={30000}
+        rotationSpeed={0.2}
+        color={0x8d00ff}
+      />
+      <Cloud
+        position={[6, -2, 0]}
+        rotation={[0, 1, 0]}
+        args={[10, 10, 10]}
+        castShadow
+        receiveShadow
+        opacity={0.1}
+        blendFunction={THREE.AdditiveBlending}
+        size={0.5}
+        particles={30000}
+        rotationSpeed={0.2}
+        color={0xffffff}
+      />
+    </group>
+  );
+};
+
+export default function Scene() {
+  const [wind, setWind] = useState(false);
+  // This will run the effect when cloudRef.current changes
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className='relative h-screen w-screen'>
       <Canvas
         shadows
         camera={{
@@ -42,8 +116,8 @@ export default function Scene() {
           far: 100,
         }}
       >
-        <color attach="background" args={["#000"]} />
-        <fog attach="fog" args={["#ffffff", 10, 20]} />
+        <color attach='background' args={["#000"]} />
+        <fog attach='fog' args={["#ffffff", 10, 20]} />
         <ambientLight intensity={3} />
 
         <directionalLight
@@ -61,75 +135,10 @@ export default function Scene() {
           shadow-mapSize={{ width: 1024, height: 1024 }}
           shadow-bias={-0.001}
         />
-        <group ref={cloudRef} position={[0, 0, 10]}>
-          <Cloud
-            position={[-6, -2, 0]}
-            rotation={[0, 1, 0]}
-            args={[10, 10, 10]}
-            castShadow
-            receiveShadow
-            opacity={0.5}
-            blendFunction={THREE.AdditiveBlending}
-            size={0.5}
-            particles={30000}
-            rotationSpeed={0.2}
-            color={0x8d00ff}
-          />
-          <Cloud
-            position={[-6, -2, 0]}
-            rotation={[0, 1, 0]}
-            args={[10, 10, 10]}
-            castShadow
-            receiveShadow
-            opacity={0.2}
-            blendFunction={THREE.AdditiveBlending}
-            size={0.5}
-            particles={30000}
-            rotationSpeed={0.2}
-            color={0xffffff}
-          />
-          <Cloud
-            position={[6, 2, 0]}
-            rotation={[0, 1, 0]}
-            args={[10, 10, 10]}
-            castShadow
-            receiveShadow
-            opacity={0.5}
-            blendFunction={THREE.AdditiveBlending}
-            size={0.5}
-            particles={30000}
-            rotationSpeed={2}
-            color={0x8d00ff}
-          />
-          <Cloud
-            position={[4, -2, 0]}
-            rotation={[0, 1, 0]}
-            args={[10, 10, 10]}
-            castShadow
-            receiveShadow
-            opacity={0.5}
-            blendFunction={THREE.AdditiveBlending}
-            size={0.5}
-            particles={30000}
-            rotationSpeed={0.2}
-            color={0x8d00ff}
-          />
-          <Cloud
-            position={[6, -2, 0]}
-            rotation={[0, 1, 0]}
-            args={[10, 10, 10]}
-            castShadow
-            receiveShadow
-            opacity={0.1}
-            blendFunction={THREE.AdditiveBlending}
-            size={0.5}
-            particles={30000}
-            rotationSpeed={0.2}
-            color={0xffffff}
-          />
-        </group>
+
         <Suspense fallback={<Loader />}>
-          <Environment preset="sunset" />
+          <Environment preset='sunset' />
+          <CloudsGroup />
 
           <mesh position={[0, 0, 0]} castShadow receiveShadow scale={[1, 1, 1]}>
             <sphereGeometry args={[1, 32, 32]} />
@@ -137,7 +146,7 @@ export default function Scene() {
               color={"#ffffff"}
               emissive={"#ffffff"}
               emissiveIntensity={0.1}
-              attach="material"
+              attach='material'
               roughness={0.1}
               metalness={0.1}
               wireframe={false}
@@ -162,7 +171,7 @@ export default function Scene() {
 
         <EffectComposer>
           <HueSaturation
-            inputColorSpace="#FB8B24"
+            inputColorSpace='#FB8B24'
             saturation={0.1}
             hue={0.05}
           />
